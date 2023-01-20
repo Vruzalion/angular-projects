@@ -1,0 +1,138 @@
+<div class="centered-content">
+    <div class="task-manager-container">
+        <div class="sidebar has-background-white">
+            <h1 class="title has-text-primary">
+                Listes
+            </h1>
+
+            <div class="list-menu show-menu">
+                <a href="" class="list-menu-item" *ngFor="let list of lists" [routerLink]="['/lists', list._id]"
+                    routerLinkActive="is-active">
+                    <p>{{list.title}}</p>
+                </a>
+            </div>
+
+            <button class="button is-primary has-text-white forhover" routerLink="/new-list">+ Nouvelle liste</button>
+
+        </div>
+
+        <div class="task-list-container has-background-light">
+            <div *ngIf="idVar!==undefined">
+                <div class="top-bar">
+                    <h1 class="title has-text-primary">
+                        Tâches
+                    </h1>
+                    <div class="dropdown is-right is-hoverable">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true">
+
+                                <span class="icon">
+                                    <i class="uil uil-filter"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                            <div class="dropdown-content">
+                                <a (click)="myfilter1()" [ngClass]=" {'is-active' : enCours} " class="dropdown-item">
+                                    En cours
+                                </a>
+                                <a (click)="myfilter2() " [ngClass]=" {'is-active' : terminee} " class="dropdown-item ">
+                                    Terminées
+                                </a>
+                                <a (click)="myfilter3()" [ngClass]=" {'is-active' : toutestaches} "
+                                    class="dropdown-item ">
+                                    Toutes les tâches
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown is-right is-hoverable " style="margin-left:10px">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true">
+
+                                <span class="icon">
+                                    <i class="uil uil-setting"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                            <div class="dropdown-content">
+                                <a [routerLink]="['/edit-list',  selectedListId]" class="dropdown-item">
+                                    Modifier
+                                </a>
+                                <a (click)="onDeleteListClick()" class="dropdown-item has-text-danger">
+                                    Supprimer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tâches d'une liste -->
+                <div class="nav__toggle">
+                    <div class="dropdown is-left is-hoverable">
+                        <div class="dropdown-trigger">
+                            <button class="button" aria-haspopup="true">
+                                <span class="icon">
+                                    <i class="uil uil-apps"></i>
+                                </span>
+                            </button>
+                        </div>
+                        <div class="dropdown-menu" id="dropdown-menu4" role="menu" style=" max-height: 10px;">
+                            <div class="dropdown-content" style="padding: 30px; ">
+                                <h1 class="title ">
+                                    Listes
+                                </h1>
+                    
+                                <a href="" class="list-menu-item" *ngFor="let list of lists"
+                                    [routerLink]="['/lists', list._id]" routerLinkActive="is-active">
+                                    <p>{{list.title}}</p>
+                                    
+                                </a>
+                                <button style="margin-top: 10px;" class="button is-primary has-text-white forhover" routerLink="/new-list">+ Nouvelle liste</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="task-spe">
+
+                    <div class="task" *ngFor="let task of finder(tasks)  " (click)="onTaskClick(task)"
+                        [ngClass]=" {'completed': task.completed}">
+                        <div class="task-text">
+                            <h1><b>{{task.title}}</b></h1>
+                            <p class="taskdesc">{{task.description}}</p>
+
+                            <p class="taskdesc"><i>Date limite: {{task.deadline| date}}</i></p>
+                            <p *ngIf="task.completed" class="taskdesca"><i>La tâche est achevée</i></p>
+                        </div>
+                        <div class="task-button">
+                            <button class="button" [routerLink]="['/lists',selectedListId, 'edit-task', task._id]">
+                                <div class="icon">
+                                    <i class="uil uil-edit"></i>
+                                </div>
+                            </button>
+                            <button class="button is-danger " (click)="onTaskDeleteClick(task._id)"
+                                style="margin-left:10px ;">
+                                <div class="icon ">
+                                    <i class="uil uil-trash-alt "></i>
+                                </div>
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <h3 class="title is-4 empty-state-text" *ngIf="tasks.length === 0">Aucune tâche dans cette liste.
+                    Créez-en une en cliquant sur le bouton +</h3>
+
+                <button *ngIf="idVar!==undefined" class="circle-add-button button is-primary">
+                    <img routerLink="./new-task" src="../../../assets/plus-icon.svg" alt="plus-icon">
+                </button>
+            </div>
+            <div *ngIf="!idVar">
+                <h3 class="title is-4 empty-state-text">Veuillez créer ou selectionner une liste sur la Sidebar</h3>
+            </div>
+
+        </div>
+
+    </div>
+</div>

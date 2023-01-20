@@ -1,0 +1,268 @@
+@import "../../../main-styles.scss";
+
+
+
+.task-manager-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+    max-width: 1000px;
+    max-height: 682px;
+    background: white;
+    border-radius: 10px;
+
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    background: white;
+    padding: 45px;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.task-list-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding: 45px;
+
+
+
+    .top-bar {
+        margin-bottom: 20px;
+        display: flex;
+
+        .title {
+            flex-grow: 1;
+            margin: 0;
+        }
+    }
+
+    .task-spe {
+        position: relative;
+        overflow: auto;
+        max-height: 540px
+
+
+    }
+
+}
+
+
+.title {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 30px;
+    letter-spacing: 1px;
+}
+
+.taskdesc {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 3px;
+}
+
+.taskdesca {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 14px;
+    margin-left: 45%;
+    margin-top: 3px;
+}
+
+.list-menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+    margin-right: -20px;
+    margin-left: -20px;
+    margin-bottom: 40px;
+    flex-grow: 1;
+    overflow: auto;
+
+    .list-menu-item {
+
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        border-radius: 5px;
+        width: 100%;
+        color: #5f5f5f;
+        margin-bottom: 5px;
+        transition: box-shadow 0.2s ease, transform 0.3s ease;
+        transform: scale(0.95);
+
+        &:hover {
+            background: $light;
+            transition: box-shadow 0.2s ease, transform 0.3s ease;
+            transform: scale(1);
+
+        }
+
+        &.is-active {
+            background-color: #BFEAF5;
+            color: $dark-green;
+            transition: box-shadow 0.2s ease, transform 0.3s ease;
+            transform: scale(1.001);
+        }
+    }
+}
+
+.task {
+    display: flex;
+    background: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+
+    align-items: center;
+
+    &:not(.complete) {
+        cursor: pointer;
+        transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+        &:active {
+            transform: scale(0.98)
+        }
+
+        &:hover {
+            box-shadow: 0 0 0 5px #eeeeee;
+            transform: scale(0.98);
+
+            .task-button {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+
+        }
+    }
+
+
+    &.completed .task-text {
+        text-decoration: line-through;
+        opacity: 50%;
+    }
+
+    .task-text {
+        flex-grow: 1;
+    }
+
+    .task-button {
+        opacity: 0;
+        transition: opacity 0.2s, transform 0.2s ease;
+        transform: scale(0.8);
+    }
+
+
+}
+
+.circle-add-button {
+    position: absolute;
+    bottom: 55px;
+    right: 75px;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.empty-state-text {
+    font-size: 20px;
+    color: #777;
+    text-align: center;
+}
+
+
+.nav__toggle {
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.nav__icon,
+.nav__close,
+.nav__toggle {
+    display: none;
+}
+
+
+
+
+/* For small devices*/
+@media screen and (max-width: 992px) {
+
+    
+  }
+
+@media screen and (max-width: 780px) {
+    .task-manager-container {
+        margin: 15px;
+
+    }
+
+    .circle-add-button {
+        position: absolute;
+        bottom: 50px;
+        right: 25px;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        width: 100%;
+        background-color: var(--body-color);
+        padding: 2rem 1.5rem 4rem;
+        box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+        border-radius: 1.5rem 1.5rem 0 0;
+        transition: .3s;
+
+    }
+ /*Show menu*/
+    .show-menu {
+
+    }
+
+    .task-list-container {
+        border-radius: 15px;
+
+        .task-spe {
+
+            overflow: auto;
+            max-height: 500px;
+        }
+
+    }
+
+    .nav__icon,
+    .nav__close,
+    .nav__toggle {
+        display:flex;
+    }
+
+
+
+}
+
+@media screen and (max-width: 470px) {
+    .task-list-container {
+
+
+        .task-spe {
+            padding: 20px;
+            overflow: auto;
+            max-height: 500px;
+        }
+
+    }
+
+}
